@@ -1,845 +1,923 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marwin Navia - Quality Assurance Specialist</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(-45deg, #2563eb, #3b82f6, #60a5fa, #93c5fd);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: #1f2937;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        @keyframes gradientBG {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        /* Animated Background Elements */
-        .bg-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 20s infinite linear;
-        }
-
-        .shape.circle {
-            border-radius: 50%;
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-        }
-
-        .shape.square {
-            background: linear-gradient(135deg, #374151, #6b7280);
-            transform: rotate(45deg);
-        }
-
-        .shape.triangle {
-            width: 0;
-            height: 0;
-            border-left: 30px solid transparent;
-            border-right: 30px solid transparent;
-            border-bottom: 50px solid rgba(59, 130, 246, 0.3);
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
-        }
-
-        /* Header Section */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 3rem 2rem;
-            margin: 2rem;
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            animation: slideInDown 1s ease-out;
-        }
-
-        @keyframes slideInDown {
-            from { transform: translateY(-100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .avatar-container {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 2rem;
-            position: relative;
-            animation: pulse 2s infinite;
-        }
-
-        .avatar {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
-        }
-
-        .avatar::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #2563eb, #60a5fa, #93c5fd, #3b82f6);
-            z-index: -1;
-            animation: rotate 4s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .name {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #1e40af, #2563eb, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            animation: textGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes textGlow {
-            from { filter: brightness(1); }
-            to { filter: brightness(1.2); }
-        }
-
-        .title {
-            font-size: 1.8rem;
-            color: #6b7280;
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-item::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transition: all 0.5s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .contact-item:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
-        }
-
-        /* Section Styles */
-        .section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            margin: 2rem;
-            padding: 3rem;
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.15);
-            position: relative;
-            overflow: hidden;
-            animation: slideInUp 0.8s ease-out;
-            animation-fill-mode: both;
-        }
-
-        @keyframes slideInUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .section:nth-child(2) { animation-delay: 0.2s; }
-        .section:nth-child(3) { animation-delay: 0.4s; }
-        .section:nth-child(4) { animation-delay: 0.6s; }
-        .section:nth-child(5) { animation-delay: 0.8s; }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            position: relative;
-            color: #1e40af;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #2563eb, #60a5fa);
-            border-radius: 2px;
-            animation: expandWidth 1s ease-out;
-        }
-
-        @keyframes expandWidth {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-card {
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            color: white;
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            text-align: center;
-            transform: translateY(0);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #1e40af, #3b82f6, #60a5fa, #93c5fd);
-            border-radius: 20px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .skill-card:hover::before {
-            opacity: 1;
-        }
-
-        .skill-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .skill-card:hover::after {
-            left: 100%;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.3);
-        }
-
-        .skill-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        .skill-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .skill-description {
-            font-size: 1rem;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
-
-        /* Timeline Styles */
-        .timeline {
-            position: relative;
-            margin: 3rem 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, #2563eb, #3b82f6, #60a5fa);
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 4rem;
-            padding-left: 120px;
-            animation: slideInRight 0.6s ease-out;
-            animation-fill-mode: both;
-        }
-
-        .timeline-item:nth-child(even) {
-            animation: slideInLeft 0.6s ease-out;
-            animation-fill-mode: both;
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(-50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideInLeft {
-            from { transform: translateX(50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 34px;
-            top: 20px;
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            border-radius: 50%;
-            border: 6px solid white;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
-            animation: pulse 2s infinite;
-        }
-
-        .timeline-content {
-            background: linear-gradient(135deg, #f8faff, #e0f2fe);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border-left: 5px solid #2563eb;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .timeline-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(59, 130, 246, 0.05));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .timeline-content:hover::before {
-            opacity: 1;
-        }
-
-        .timeline-content:hover {
-            transform: translateX(15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
-            border-left-color: #60a5fa;
-        }
-
-        .job-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #1e40af;
-            margin-bottom: 0.8rem;
-        }
-
-        .company {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.8rem;
-        }
-
-        .duration {
-            font-size: 1rem;
-            color: #6b7280;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        .job-description {
-            color: #4b5563;
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-
-        .job-description ul {
-            margin-left: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .job-description li {
-            margin-bottom: 0.8rem;
-            position: relative;
-        }
-
-        .job-description li::before {
-            content: '▸';
-            color: #2563eb;
-            font-weight: bold;
-            position: absolute;
-            left: -1.5rem;
-        }
-
-        /* Learning Badge */
-        .learning-section {
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            color: white;
-            padding: 2rem;
-            border-radius: 20px;
-            margin: 2rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .learning-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 10s linear infinite;
-        }
-
-        .learning-badge {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 3rem;
-            border-radius: 50px;
-            display: inline-block;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin: 1rem 0;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
-            to { box-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
-        }
-
-        .learning-badge::before {
-            content: '🚀';
-            margin-right: 1rem;
-            font-size: 1.5rem;
-        }
-
-        /* Education Section */
-        .education-card {
-            background: linear-gradient(135deg, #f8faff, #e0f2fe);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border-left: 5px solid #2563eb;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .education-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
-        }
-
-        .education-card::before {
-            content: '🎓';
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            font-size: 3rem;
-            opacity: 0.3;
-        }
-
-        .degree-title {
-            color: #1e40af;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .institution {
-            color: #374151;
-            font-weight: 600;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .graduation-year {
-            color: #6b7280;
-            font-style: italic;
-            font-size: 1.1rem;
-        }
-
-        /* Floating Particles */
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #60a5fa;
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: floatParticle 15s infinite linear;
-        }
-
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px);
-                opacity: 0;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .name { font-size: 2.5rem; }
-            .contact-info { flex-direction: column; align-items: center; gap: 0.5rem; }
-            .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .timeline::before { left: 20px; }
-            .timeline-item { padding-left: 70px; }
-            .timeline-dot { left: 4px; }
-            .section { padding: 2rem 1.5rem; margin: 1rem; }
-            .header { padding: 2rem 1.5rem; margin: 1rem; }
-        }
-
-        /* Interactive hover effects */
-        .interactive-element {
-            transition: all 0.3s ease;
-        }
-
-        .interactive-element:hover {
-            transform: scale(1.02);
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marwin Navia — QA Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #030508;
+    --deep: #070d14;
+    --surface: #0a1220;
+    --card: #0d1825;
+    --border: #0f2a4a;
+    --blue-dim: #0e3a6e;
+    --blue: #1a6eff;
+    --blue-bright: #38a3ff;
+    --blue-glow: #5bc8ff;
+    --cyan: #00e5ff;
+    --white: #f0f8ff;
+    --white-dim: #8ab0cc;
+    --white-muted: #3a5a7a;
+    --font-display: 'Orbitron', monospace;
+    --font-body: 'Rajdhani', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── GRID BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(26,110,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,110,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── SCAN LINES ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── AMBIENT GLOW ORBS ── */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(120px);
+    opacity: 0.18;
+  }
+  .orb-1 { width: 600px; height: 600px; top: -200px; left: -200px; background: var(--blue); }
+  .orb-2 { width: 400px; height: 400px; bottom: 10%; right: -150px; background: var(--cyan); opacity: 0.1; }
+  .orb-3 { width: 300px; height: 300px; top: 50%; left: 40%; background: var(--blue-bright); opacity: 0.08; }
+
+  /* ── WRAPPER ── */
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  /* ── NAV BAR ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(3,5,8,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 -2rem;
+  }
+  nav .logo {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--blue-glow);
+    letter-spacing: 0.2em;
+  }
+  nav .logo span { color: var(--white-dim); }
+  nav ul { display: flex; gap: 2rem; list-style: none; }
+  nav ul li a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--white-dim);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+  nav ul li a:hover { color: var(--blue-bright); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 0 4rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--blue-bright);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--blue);
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3rem;
+  }
+  .hero-name .line-2 {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--blue-bright);
+    display: block;
+  }
+
+  .hero-title {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--cyan);
+    letter-spacing: 0.2em;
+    margin: 2rem 0;
+    opacity: 0.9;
+  }
+
+  .hero-summary {
+    max-width: 580px;
+    font-size: 1.1rem;
+    color: var(--white-dim);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .hero-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .contact-chip {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--white-dim);
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+  }
+  .contact-chip:hover {
+    border-color: var(--blue);
+    color: var(--blue-bright);
+    background: rgba(26,110,255,0.08);
+  }
+  .contact-chip .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    flex-shrink: 0;
+    box-shadow: 0 0 6px var(--blue);
+  }
+
+  /* hero stats */
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--blue-bright);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--white-muted);
+    letter-spacing: 0.1em;
+    margin-top: 0.3rem;
+  }
+
+  /* decorative vertical line on hero */
+  .hero-deco {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.3;
+  }
+  .hero-deco span {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--blue);
+    writing-mode: vertical-rl;
+    letter-spacing: 0.25em;
+  }
+  .hero-deco::before, .hero-deco::after {
+    content: '';
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--blue), transparent);
+  }
+
+  /* ── SECTION WRAPPER ── */
+  section {
+    margin: 5rem 0;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--blue);
+    letter-spacing: 0.15em;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  /* ── SKILLS GRID ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-cell {
+    background: var(--card);
+    padding: 1.8rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+  }
+  .skill-cell:hover {
+    background: var(--surface);
+  }
+  .skill-cell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,110,255,0.06), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .skill-cell:hover::after { opacity: 1; }
+
+  .skill-cell-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--blue);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .skill-cell-name {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .skill-cell-desc {
+    font-size: 0.85rem;
+    color: var(--white-dim);
+    line-height: 1.55;
+  }
+  .skill-cell-icon {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    font-size: 1.4rem;
+    opacity: 0.25;
+  }
+
+  /* highlighted cell */
+  .skill-cell.highlight {
+    background: rgba(26,110,255,0.06);
+    border-left: 2px solid var(--blue);
+  }
+  .skill-cell.highlight .skill-cell-tag { color: var(--cyan); }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--blue), var(--border), transparent);
+  }
+
+  .exp-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 2rem;
+  }
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.4rem;
+    width: 10px;
+    height: 10px;
+    background: var(--blue);
+    border: 2px solid var(--black);
+    box-shadow: 0 0 12px var(--blue);
+    transform: rotate(45deg);
+  }
+  .exp-item:first-child::before {
+    background: var(--cyan);
+    box-shadow: 0 0 16px var(--cyan);
+  }
+
+  .exp-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+  .exp-role {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .exp-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--blue-bright);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--blue-dim);
+    background: rgba(26,110,255,0.05);
+  }
+  .exp-company {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--white-muted);
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+  }
+  .exp-company span {
+    color: var(--blue-bright);
+    margin-right: 0.5rem;
+  }
+
+  .exp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .exp-list li {
+    font-size: 0.95rem;
+    color: var(--white-dim);
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .exp-list li::before {
+    content: '//';
+    position: absolute;
+    left: 0;
+    color: var(--blue-dim);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    top: 0.1em;
+  }
+
+  /* ── LEARNING BANNER ── */
+  .learning-banner {
+    border: 1px solid var(--blue-dim);
+    background: linear-gradient(135deg, rgba(26,110,255,0.07), rgba(0,229,255,0.03));
+    padding: 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+  .learning-banner::before {
+    content: 'CURRENTLY LEARNING';
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--blue-dim);
+    letter-spacing: 0.25em;
+  }
+  .learning-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--cyan), var(--blue));
+    box-shadow: 0 0 12px var(--cyan);
+  }
+  .learning-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .learn-pill {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--cyan);
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(0,229,255,0.25);
+    background: rgba(0,229,255,0.04);
+    letter-spacing: 0.08em;
+  }
+  .learn-pill.blue {
+    color: var(--blue-bright);
+    border-color: rgba(26,110,255,0.3);
+    background: rgba(26,110,255,0.05);
+  }
+
+  /* ── EDUCATION ── */
+  .edu-card {
+    border: 1px solid var(--border);
+    background: var(--card);
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    position: relative;
+    overflow: hidden;
+  }
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--blue), transparent);
+  }
+  .edu-degree {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .edu-institution {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--blue-bright);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.4rem;
+  }
+  .edu-meta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--white-muted);
+    letter-spacing: 0.08em;
+  }
+  .edu-badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--cyan);
+    border: 1px solid rgba(0,229,255,0.3);
+    padding: 0.4rem 0.8rem;
+    background: rgba(0,229,255,0.04);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    align-self: start;
+  }
+
+  /* ── PROJECTS ROW ── */
+  .projects-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .project-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    transition: border-color 0.2s, background 0.2s;
+    text-decoration: none;
+  }
+  .project-row:hover {
+    border-color: var(--blue-dim);
+    background: var(--surface);
+  }
+  .project-row-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--blue-dim);
+    min-width: 2rem;
+  }
+  .project-row-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+    flex: 1;
+  }
+  .project-row-url {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--blue-bright);
+    opacity: 0.7;
+  }
+  .project-row-arrow {
+    color: var(--blue-dim);
+    font-size: 0.8rem;
+    transition: transform 0.2s, color 0.2s;
+  }
+  .project-row:hover .project-row-arrow {
+    transform: translateX(4px);
+    color: var(--blue-bright);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 6rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer .f-name {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    color: var(--blue-bright);
+    letter-spacing: 0.15em;
+  }
+  footer .f-copy {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--white-muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes flicker {
+    0%, 95%, 100% { opacity: 1; }
+    96% { opacity: 0.8; }
+    97% { opacity: 1; }
+    98% { opacity: 0.85; }
+  }
+  .hero-name { animation: flicker 8s infinite; }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 6px var(--blue); }
+    50% { box-shadow: 0 0 16px var(--blue-glow), 0 0 30px var(--blue); }
+  }
+  .exp-item:first-child::before { animation: pulse-dot 2s infinite; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .hero-name { font-size: clamp(2.5rem, 10vw, 4rem); }
+    .edu-card { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+    .hero-deco { display: none; }
+  }
+  @media (max-width: 480px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="bg-shapes">
-        <div class="shape circle" style="width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s;"></div>
-        <div class="shape square" style="width: 60px; height: 60px; top: 20%; right: 15%; animation-delay: 5s;"></div>
-        <div class="shape circle" style="width: 40px; height: 40px; top: 60%; left: 20%; animation-delay: 10s;"></div>
-        <div class="shape triangle" style="top: 70%; right: 10%; animation-delay: 15s;"></div>
-        <div class="shape square" style="width: 50px; height: 50px; top: 40%; left: 80%; animation-delay: 8s;"></div>
-        
-        <!-- Floating Particles -->
-        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
-        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
-        <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
-        <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
-        <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
-        <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
-        <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
-        <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">MPN<span>.QA</span></div>
+  <ul>
+    <li><a href="#skills">SKILLS</a></li>
+    <li><a href="#experience">EXP</a></li>
+    <li><a href="#projects">PROJECTS</a></li>
+    <li><a href="#education">EDUCATION</a></li>
+  </ul>
+</nav>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">QA SPECIALIST &amp; TEST AUTOMATION ENGINEER</div>
+    <h1 class="hero-name">Marwin<span class="line-2">Navia</span></h1>
+    <p class="hero-title">// Quality Assurance · Test Automation · API Validation</p>
+    <p class="hero-summary">
+      QA Specialist with a BS in Information Technology. Skilled in manual and automated testing
+      for web, API, and mobile platforms. Advancing expertise in Playwright C# with MSTest,
+      strong background in defect tracking, SIT, and cross-functional team collaboration.
+    </p>
+    <div class="hero-contacts">
+      <div class="contact-chip"><span class="dot"></span>San Vicente, Santo Tomas, Batangas</div>
+      <div class="contact-chip"><span class="dot"></span>0906-232-1846</div>
+      <div class="contact-chip"><span class="dot"></span>marwinnavia015@gmail.com</div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">6+</span><span class="stat-label">YEARS EXP</span></div>
+      <div class="stat"><span class="stat-num">4</span><span class="stat-label">COMPANIES</span></div>
+      <div class="stat"><span class="stat-num">∞</span><span class="stat-label">BUGS SQUASHED</span></div>
+    </div>
+    <div class="hero-deco">
+      <span>MARWIN PERALTA NAVIA</span>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-num">01 //</span>
+      <h2 class="section-title">Core Competencies</h2>
+      <span class="section-line"></span>
     </div>
 
-    <div class="container">
-        <!-- Header -->
-        <div class="header interactive-element">
-            <div class="avatar-container">
-                <div class="avatar">👨‍💻</div>
-            </div>
-            <h1 class="name">Marwin Peralta Navia</h1>
-            <p class="title">Quality Assurance Specialist & Test Automation Engineer</p>
-            <div class="contact-info">
-                <div class="contact-item">📍 San Vicente, Santo Tomas, Batangas</div>
-                <div class="contact-item">📱 0906-232-1846</div>
-                <div class="contact-item">✉️ marwinnavia015@gmail.com</div>
-            </div>
-        </div>
+    <div class="skills-grid">
+      <div class="skill-cell highlight">
+        <div class="skill-cell-tag">automation</div>
+        <div class="skill-cell-name">Test Automation</div>
+        <div class="skill-cell-desc">Playwright C# with MSTest — building scalable automated test suites</div>
+        <div class="skill-cell-icon">⚡</div>
+      </div>
+      <div class="skill-cell highlight">
+        <div class="skill-cell-tag">api</div>
+        <div class="skill-cell-name">API Testing</div>
+        <div class="skill-cell-desc">Postman for endpoint validation, request/response analysis, and data integrity checks</div>
+        <div class="skill-cell-icon">🔌</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-tag">design</div>
+        <div class="skill-cell-name">Test Case Design</div>
+        <div class="skill-cell-desc">Creating, executing, and maintaining comprehensive test plans with precision</div>
+        <div class="skill-cell-icon">🧪</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-tag">platforms</div>
+        <div class="skill-cell-name">App Testing</div>
+        <div class="skill-cell-desc">Web and mobile application testing across multiple platforms and devices</div>
+        <div class="skill-cell-icon">📱</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-tag">defects</div>
+        <div class="skill-cell-name">Defect Management</div>
+        <div class="skill-cell-desc">Tracking, documenting, and reporting software defects with technical precision</div>
+        <div class="skill-cell-icon">🐛</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-tag">process</div>
+        <div class="skill-cell-name">SDLC &amp; QA Processes</div>
+        <div class="skill-cell-desc">Deep knowledge of Software Development Life Cycle and QA methodologies</div>
+        <div class="skill-cell-icon">🔄</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-tag">integration</div>
+        <div class="skill-cell-name">System Integration</div>
+        <div class="skill-cell-desc">SIT and cross-system validation including G2S (Game to System) internal tools</div>
+        <div class="skill-cell-icon">🔗</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-tag">tooling</div>
+        <div class="skill-cell-name">Testing Tools</div>
+        <div class="skill-cell-desc">Visual Studio · Postman · Jira · Confluence · MantisBT · G2S system</div>
+        <div class="skill-cell-icon">⚙️</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-tag">management</div>
+        <div class="skill-cell-name">Project Collaboration</div>
+        <div class="skill-cell-desc">Cross-functional planning, SIT documentation, stakeholder reporting</div>
+        <div class="skill-cell-icon">🗄️</div>
+      </div>
+    </div>
 
-        <!-- Summary -->
-        <div class="section interactive-element fade-in">
-            <h2 class="section-title">Professional Summary</h2>
-            <p style="font-size: 1.2rem; line-height: 2; color: #4b5563; font-weight: 400;">
-                Quality Assurance Specialist with a BS in Information Technology and experience in manual and automated testing. 
-                Skilled in web, API, and mobile test planning, defect tracking, and cross-team collaboration. 
-                Recently started automation using Playwright and bring a strong background in software QA, 
-                system analysis, and technical support.
-            </p>
-            <div class="learning-section">
-                <div class="learning-badge">Currently mastering Playwright C# with MSTest for Test Automation</div>
-                <div class="learning-badge" style="background: rgba(255, 255, 255, 0.15); margin-top: 1rem;">Experienced in API Testing with Postman for endpoint validation</div>
-                <p style="margin-top: 1rem; font-size: 1.1rem; opacity: 0.9;">Advancing expertise in automated testing frameworks and API validation to deliver robust, scalable testing solutions</p>
-            </div>
-        </div>
+    <div class="learning-banner">
+      <p style="font-family:var(--font-display);font-size:0.85rem;font-weight:700;color:var(--white);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;">Active Development</p>
+      <p style="font-size:0.9rem;color:var(--white-dim);">Advancing expertise in automated testing frameworks and API validation to deliver robust, scalable testing solutions.</p>
+      <div class="learning-badge-row">
+        <span class="learn-pill">Playwright C# + MSTest</span>
+        <span class="learn-pill blue">API Automation with Postman</span>
+        <span class="learn-pill blue">CI/CD Integration</span>
+      </div>
+    </div>
+  </section>
 
-        <!-- Skills -->
-        <div class="section interactive-element fade-in">
-            <h2 class="section-title">Core Competencies</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">🧪</div>
-                    <div class="skill-title">Test Case Design</div>
-                    <div class="skill-description">Expert in creating, executing, and maintaining comprehensive test cases with precision and attention to detail</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">📱</div>
-                    <div class="skill-title">Application Testing</div>
-                    <div class="skill-description">Extensive experience in web and mobile application testing across multiple platforms and devices</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🐛</div>
-                    <div class="skill-title">Defect Management</div>
-                    <div class="skill-description">Proficient in tracking, documenting, and reporting software defects with clear communication</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔄</div>
-                    <div class="skill-title">SDLC & QA Processes</div>
-                    <div class="skill-description">Deep knowledge of Software Development Life Cycle and QA methodologies for optimal workflow</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔗</div>
-                    <div class="skill-title">System Integration</div>
-                    <div class="skill-description">Specialized in System Integration Testing (SIT) and cross-system validation processes</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔌</div>
-                    <div class="skill-title">API Testing</div>
-                    <div class="skill-description">Proficient in API testing using Postman for comprehensive endpoint validation and automation</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">⚡</div>
-                    <div class="skill-title">Test Automation</div>
-                    <div class="skill-description">Currently advancing skills in Playwright C# with MSTest for comprehensive automated testing</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">⚙️</div>
-                    <div class="skill-title">Testing Tools</div>
-                    <div class="skill-description">Visual Studio, Postman, Jira, Confluence, MantisBT, G2S system (internal tool for Game to System validation)</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🗄️</div>
-                    <div class="skill-title">Project Management</div>
-                    <div class="skill-description">
-  Different Video slots machine
-  (Website:
-  <a href="https://aruzeglobal.com/products" target="_blank" rel="noopener noreferrer">
-    https://aruzeglobal.com/products
-  </a>
-  ),
-  Deliveries.ph Webapp
-  (<a href="https://www.deliveries.ph" target="_blank" rel="noopener noreferrer">
-    https://www.deliveries.ph
-  </a>),
-  Fleet.ph Webapp
-  (<a href="https://www.fleet.ph" target="_blank" rel="noopener noreferrer">
-    https://www.fleet.ph
-  </a>),
-  Fleet Mobile App for Rider
-  (<a href="https://play.google.com/store/apps/details?id=com.cgs.fleet" target="_blank" rel="noopener noreferrer">
-    Fleet PH App on Play Store
-  </a>)
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-num">02 //</span>
+      <h2 class="section-title">Professional Experience</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="timeline">
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Quality Assurance Specialist</div>
+          <div class="exp-date">MAR 2023 — DECEMBER 2025</div>
+        </div>
+        <div class="exp-company"><span>//</span>Last Mile Inc.</div>
+        <ul class="exp-list">
+          <li>Create, update, and maintain detailed test cases and plans for web, API, and mobile apps</li>
+          <li>Execute thorough test reviews, track critical defects, and coordinate resolution with development teams</li>
+          <li>Perform comprehensive API testing using Postman to validate endpoints, request/response structures, and data integrity</li>
+          <li>Collaborate across all stages of product development including planning, SIT, documentation, and Product Team meetings</li>
+          <li>Deliver regular progress updates to supervisors while managing administrative QA activities and process improvements</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Software QA Tester</div>
+          <div class="exp-date">SEP 2021 — MAR 2023</div>
+        </div>
+        <div class="exp-company"><span>//</span>Aruze Global Shared Services</div>
+        <ul class="exp-list">
+          <li>Developed and maintained adaptive test cases based on evolving system requirements and specifications</li>
+          <li>Systematically identified, documented, and reported software defects with exceptional clarity and technical precision</li>
+          <li>Fostered close collaboration with developers and QA team members to ensure efficient issue resolution and quality delivery</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Technical Support Representative</div>
+          <div class="exp-date">FEB 2020 — MAR 2021</div>
+        </div>
+        <div class="exp-company"><span>//</span>Infocom Technologies Inc.</div>
+        <ul class="exp-list">
+          <li>Managed high-volume inbound technical support for internet and telecommunications services</li>
+          <li>Provided clear, effective troubleshooting solutions and technical resolution guidance</li>
+          <li>Created and managed comprehensive fault tickets for coordinated field technical visits</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">MIS System Analyst</div>
+          <div class="exp-date">FEB 2019 — DEC 2019</div>
+        </div>
+        <div class="exp-company"><span>//</span>C.P. Reyes Hospital</div>
+        <ul class="exp-list">
+          <li>Conducted comprehensive analysis of business processes and systems to identify improvement opportunities</li>
+          <li>Installed, configured, and maintained critical computer hardware and network infrastructure</li>
+          <li>Provided ongoing system monitoring and technical support to hospital staff across departments</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-num">03 //</span>
+      <h2 class="section-title">Projects Tested</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="projects-strip">
+      <a class="project-row" href="https://aruzeglobal.com/products" target="_blank" rel="noopener">
+        <span class="project-row-num">01</span>
+        <span class="project-row-name">Aruze Global — Video Slot Machines</span>
+        <span class="project-row-url">aruzeglobal.com</span>
+        <span class="project-row-arrow">→</span>
+      </a>
+      <a class="project-row" href="https://www.deliveries.ph" target="_blank" rel="noopener">
+        <span class="project-row-num">02</span>
+        <span class="project-row-name">Deliveries.ph — Web Application</span>
+        <span class="project-row-url">deliveries.ph</span>
+        <span class="project-row-arrow">→</span>
+      </a>
+      <a class="project-row" href="https://www.fleet.ph" target="_blank" rel="noopener">
+        <span class="project-row-num">03</span>
+        <span class="project-row-name">Fleet.ph — Web Application</span>
+        <span class="project-row-url">fleet.ph</span>
+        <span class="project-row-arrow">→</span>
+      </a>
+      <a class="project-row" href="https://play.google.com/store/apps/details?id=com.cgs.fleet" target="_blank" rel="noopener">
+        <span class="project-row-num">04</span>
+        <span class="project-row-name">Fleet PH — Mobile App for Riders</span>
+        <span class="project-row-url">play.google.com</span>
+        <span class="project-row-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header">
+      <span class="section-num">04 //</span>
+      <h2 class="section-title">Education</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="edu-card">
+      <div>
+        <div class="edu-degree">Bachelor of Science in Information Technology</div>
+        <div class="edu-institution">Dalubhasaan ng Lungsod ng Lucena</div>
+        <div class="edu-meta">2014 – 2018</div>
+      </div>
+      <div class="edu-badge">DEAN'S LISTER</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="f-name">MARWIN PERALTA NAVIA</span>
+    <span class="f-copy">QA SPECIALIST · SANTO TOMAS, BATANGAS · PH</span>
+  </footer>
+
 </div>
 
-            </div>
-        </div>
-
-        <!-- Experience -->
-        <div class="section interactive-element fade-in">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="job-title">Quality Assurance Specialist</h3>
-                        <h4 class="company">Last Mile Inc.</h4>
-                        <p class="duration">Mar 2023 – December 2025</p>
-                        <div class="job-description">
-                            <p><strong>Leading comprehensive QA initiatives for web, api, and mobile applications</strong></p>
-                            <ul>
-                                <li>Create, update, and maintain detailed test cases and plans for web, api, and mobile apps. </li>
-                                <li>Execute thorough test reviews, track critical defects, and coordinate resolution efforts with development teams</li>
-                                <li>Perform comprehensive API testing using Postman to validate endpoints, request/response structures, and data integrity</li>
-                                <li>Collaborate across all stages of product development including planning, System Integration Testing, documentation, and Product Team meetings</li>
-                                <li>Deliver regular progress updates to supervisors while managing administrative QA activities and process improvements</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="job-title">Software QA Tester</h3>
-                        <h4 class="company">Aruze Global Shared Services</h4>
-                        <p class="duration">Sep 2021 – Mar 2023</p>
-                        <div class="job-description">
-                            <p><strong>Specialized in dynamic test case development and cross-functional collaboration</strong></p>
-                            <ul>
-                                <li>Developed and maintained adaptive test cases based on evolving system requirements and specifications</li>
-                                <li>Systematically identified, documented, and reported software defects with exceptional clarity and technical precision</li>
-                                <li>Fostered close collaboration with developers and QA team members to ensure efficient issue resolution and quality delivery</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="job-title">Technical Support Representative</h3>
-                        <h4 class="company">Infocom Technologies Inc.</h4>
-                        <p class="duration">Feb 2020 – Mar 2021</p>
-                        <div class="job-description">
-                            <p><strong>Delivered exceptional technical support for telecom infrastructure</strong></p>
-                            <ul>
-                                <li>Managed high-volume inbound customer technical support calls for internet and telecommunications services</li>
-                                <li>Provided clear, effective troubleshooting solutions and technical resolution guidance</li>
-                                <li>Created and managed comprehensive fault tickets for coordinated field technical visits</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="job-title">MIS System Analyst</h3>
-                        <h4 class="company">C.P. Reyes Hospital</h4>
-                        <p class="duration">Feb 2019 – Dec 2019</p>
-                        <div class="job-description">
-                            <p><strong>Optimized healthcare technology systems and infrastructure</strong></p>
-                            <ul>
-                                <li>Conducted comprehensive analysis of business processes and existing systems to identify improvement opportunities</li>
-                                <li>Successfully installed, configured, and maintained critical computer hardware and network infrastructure</li>
-                                <li>Provided ongoing system monitoring and dedicated technical support to hospital staff across departments</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Education -->
-        <div class="section interactive-element fade-in">
-            <h2 class="section-title">Education</h2>
-            <div class="education-card">
-                <h3 class="degree-title">Bachelor of Science in Information Technology</h3>
-                <p class="institution">Dalubhasaan ng Lungsod ng Lucena</p>
-                <p class="graduation-year">2014 – 2018</p>
-                <p class="graduation-year">Dean's Lister</p>
-            </div>
-        </div>
-    </div>
-
+</body>
+</html>
